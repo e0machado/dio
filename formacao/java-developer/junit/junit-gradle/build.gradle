@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.dio'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.13.4'
+
+}
+
+test {
+    useJUnitPlatform()
+}

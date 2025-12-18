@@ -1,0 +1,39 @@
+def myGroup = "My Group"
+
+task turnOnTheCar(group: myGroup) {
+	doLast {
+		println ("turnOnTheCar")
+	}
+}
+
+task acceletateTheCar(group: myGroup) {
+	dependsOn "turnOnTheCar"
+	finalizedBy "speedUp"
+	doLast {
+		println ("acceletateTheCar")
+	}
+}
+
+task taskAfterDefaultTask(group: myGroup) {
+	dependsOn "projects"
+	doLast {
+		println ("taskAfterDefaultTask")
+	}
+}
+
+task speedUp(group: myGroup) {
+	doLast {
+		println ("speedUp")
+	}
+}
+
+task turnOnTheRadio (group: myGroup) {
+	mustRunAfter "turnOnTheCar"
+	doLast {
+		println ("turnOnTheRadio")
+	}
+}
+
+task driveCrazy(group: myGroup) {
+	dependsOn = ["turnOnTheRadio", "acceletateTheCar"]
+}

@@ -1,0 +1,44 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'C:/Users/evand/OneDrive/Documentos/dio/formacao/java-developer/maven-course/project-parent/core/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/evand/OneDrive/Documentos/dio/formacao/java-developer/maven-course/project-parent/core/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'core 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'core 1.0-SNAPSHOT API'
+org.dio
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\src\main\java = 1746312600859
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\allclasses-index.html = 1746314093105
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\allpackages-index.html = 1746314093109
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\element-list = 1746314093045
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\help-doc.html = 1746314093174
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\index-all.html = 1746314093164
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\index.html = 1746314093168
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\jquery-ui.overrides.css = 1746314093221
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\member-search-index.js = 1746314093132
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\module-search-index.js = 1746314093113
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\overview-tree.html = 1746314093088
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\package-search-index.js = 1746314093119
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\script.js = 1746314093181
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\search.js = 1746314093186
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\stylesheet.css = 1746314093178
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\tag-search-index.js = 1746314093138
+C:\Users\evand\OneDrive\Documentos\dio\formacao\java-developer\maven-course\project-parent\core\target\reports\apidocs\type-search-index.js = 1746314093123
