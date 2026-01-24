@@ -1,7 +1,9 @@
 package org.dio.lab_padroes_projeto_spring.service.impl;
 
+import org.dio.lab_padroes_projeto_spring.dto.ClienteDTO;
 import org.dio.lab_padroes_projeto_spring.model.Cliente;
 import org.dio.lab_padroes_projeto_spring.model.Endereco;
+import org.dio.lab_padroes_projeto_spring.model.mapper.ClienteMapper;
 import org.dio.lab_padroes_projeto_spring.repository.ClienteRepository;
 import org.dio.lab_padroes_projeto_spring.repository.EnderecoRepository;
 import org.dio.lab_padroes_projeto_spring.service.ClienteService;
@@ -9,7 +11,7 @@ import org.dio.lab_padroes_projeto_spring.service.ViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * Implementação da <b>Strategy</b> {@link ClienteService}, a qual pode ser
@@ -28,55 +30,59 @@ public class ClienteServiceImpl implements ClienteService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private ViaCepService viaCepService;
+    @Autowired
+    private ClienteMapper clienteMapper;
 
     // Strategy: Implementar os métodos definidos na interface.
     // Facade: Abstrair integrações com subsistemas, provendo uma interface simples.
 
     @Override
-    public Iterable<Cliente> buscarTodos() {
-        // Buscar todos os Clientes.
-        return clienteRepository.findAll();
+    public List<ClienteDTO.Response> buscarTodos() {
+        return clienteRepository.findAll()
+                .stream()
+                .map(clienteMapper::toResponse)
+                .toList();
     }
 
     @Override
-    public Cliente buscarPorId(Long id) {
-        // Buscar Cliente por ID.
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.get();
+    public ClienteDTO.Response buscarPorId(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado. ID = " + id));
+        return clienteMapper.toResponse(cliente);
     }
 
     @Override
-    public void inserir(Cliente cliente) {
-        salvarClienteComCep(cliente);
+    public ClienteDTO.Response inserir(ClienteDTO.Request dto) {
+        Endereco endereco = salvarEnderecoViaCep(dto);
+        Cliente cliente = clienteMapper.toEntity(dto);
+        cliente.setEndereco(endereco);
+
+        return clienteMapper.toResponse(clienteRepository.save(cliente));
     }
 
     @Override
-    public void atualizar(Long id, Cliente cliente) {
-        // Buscar Cliente por ID, caso exista:
-        Optional<Cliente> clienteBd = clienteRepository.findById(id);
-        if (clienteBd.isPresent()) {
-            salvarClienteComCep(cliente);
-        }
+    public ClienteDTO.Response atualizar(Long id, ClienteDTO.Request dto) {
+        Cliente clienteExistente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado. ID = " + id));
+        Endereco endereco = salvarEnderecoViaCep(dto);
+        clienteMapper.updateEntity(clienteExistente, dto, endereco);
+
+        return clienteMapper.toResponse(clienteRepository.save(clienteExistente));
     }
 
     @Override
     public void deletar(Long id) {
-        // Deletar Cliente por ID.
         clienteRepository.deleteById(id);
     }
 
-    private void salvarClienteComCep(Cliente cliente) {
-        // Verificar se o Endereco do Cliente já existe (pelo CEP).
-        String cep = cliente.getEndereco().getCep();
+    private Endereco salvarEnderecoViaCep(ClienteDTO.Request dto) {
+        String cep = dto.getEnderecoRef().getCep();
         Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
-            // Caso não exista, integrar com o ViaCEP e persistir o retorno.
             Endereco novoEndereco = viaCepService.consultarCep(cep);
             enderecoRepository.save(novoEndereco);
             return novoEndereco;
         });
-        cliente.setEndereco(endereco);
-        // Inserir Cliente, vinculando o Endereco (novo ou existente).
-        clienteRepository.save(cliente);
+        return endereco;
     }
 
 }

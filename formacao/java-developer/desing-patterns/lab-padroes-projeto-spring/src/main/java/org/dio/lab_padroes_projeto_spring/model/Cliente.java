@@ -1,13 +1,10 @@
 package org.dio.lab_padroes_projeto_spring.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Cliente {
 
     @Id

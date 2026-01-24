@@ -1,6 +1,8 @@
 package org.dio.lab_padroes_projeto_spring.service;
 
-import org.dio.lab_padroes_projeto_spring.model.Cliente;
+import org.dio.lab_padroes_projeto_spring.dto.ClienteDTO;
+
+import java.util.List;
 
 /**
  * Interface que define o padrão <b>Strategy</b> no domínio de cliente. Com
@@ -11,13 +13,13 @@ import org.dio.lab_padroes_projeto_spring.model.Cliente;
  */
 public interface ClienteService {
 
-    Iterable<Cliente> buscarTodos();
+    List<ClienteDTO.Response> buscarTodos();
 
-    Cliente buscarPorId(Long id);
+    ClienteDTO.Response buscarPorId(Long id);
 
-    void inserir(Cliente cliente);
+    ClienteDTO.Response inserir(ClienteDTO.Request dto);
 
-    void atualizar(Long id, Cliente cliente);
+    ClienteDTO.Response atualizar(Long id, ClienteDTO.Request dto);
 
     void deletar(Long id);
 
